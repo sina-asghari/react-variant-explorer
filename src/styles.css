@@ -1,0 +1,218 @@
+:root {
+  --rve-primary: #6366f1;
+  --rve-radius: 8px;
+  --rve-step-height: 48px;
+  --rve-step-gap: 4px;
+}
+
+/* Light Theme (Default) */
+.rve-container,
+.rve-theme-light,
+:root:not(.rve-theme-dark) {
+  --rve-bg: #ffffff;
+  --rve-text: #1f2937;
+  --rve-muted: #6b7280;
+  --rve-border: #e5e7eb;
+  --rve-row-hover: rgba(99, 102, 241, 0.04);
+  --rve-group-bg: #f3f4f6;
+  --rve-more-bg: rgba(0, 0, 0, 0.05);
+  --rve-more-text: #4b5563;
+  --rve-more-border: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Theme Overlay */
+.rve-theme-dark,
+[data-rve-theme="dark"] {
+  --rve-bg: #111827;
+  --rve-text: #f3f4f6;
+  --rve-muted: #9ca3af;
+  --rve-border: #374151;
+  --rve-row-hover: rgba(99, 102, 241, 0.08);
+  --rve-group-bg: #1f2937;
+  --rve-more-bg: rgba(255, 255, 255, 0.1);
+  --rve-more-text: #9ca3af;
+  --rve-more-border: rgba(255, 255, 255, 0.1);
+}
+
+/* System Preference Fallback */
+@media (prefers-color-scheme: dark) {
+  :root:not(.rve-theme-light) {
+    --rve-bg: #111827;
+    --rve-text: #f3f4f6;
+    --rve-muted: #9ca3af;
+    --rve-border: #374151;
+    --rve-row-hover: rgba(99, 102, 241, 0.08);
+    --rve-group-bg: #1f2937;
+    --rve-more-bg: rgba(255, 255, 255, 0.1);
+    --rve-more-text: #9ca3af;
+    --rve-more-border: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.rve-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  color: var(--rve-text);
+}
+
+.rve-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  border-radius: var(--rve-radius);
+  background: var(--rve-bg);
+  transition: all 0.2s ease;
+  border: 1px solid var(--rve-border);
+}
+
+.rve-row:hover {
+  background: var(--rve-row-hover);
+  border-color: var(--rve-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.rve-row-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.rve-row-rank {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--rve-muted);
+  text-transform: uppercase;
+}
+
+.rve-row-freq {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--rve-text);
+}
+
+.rve-steps-container {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  padding: 4px 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.rve-steps-container::-webkit-scrollbar {
+  display: none;
+}
+
+.rve-step {
+  height: var(--rve-step-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  clip-path: polygon(0% 0%,
+      calc(100% - 12px) 0%,
+      100% 50%,
+      calc(100% - 12px) 100%,
+      0% 100%,
+      12px 50%);
+  margin-left: -10px;
+}
+
+.rve-step:not(.rve-step-grouped) {
+  padding: 0 20px 0 28px;
+}
+
+.rve-step:first-child {
+  margin-left: 0;
+  clip-path: polygon(0% 0%,
+      calc(100% - 12px) 0%,
+      100% 50%,
+      calc(100% - 12px) 100%,
+      0% 100%);
+}
+
+.rve-step:first-child:not(.rve-step-grouped) {
+  padding-left: 16px;
+}
+
+.rve-step:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+  z-index: 10;
+}
+
+.rve-step:active {
+  transform: scale(0.98);
+}
+
+.rve-step-content {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Grouped Step Styles (Vertical Stack) */
+.rve-step-grouped {
+  flex-direction: column;
+  padding: 6px 12px 6px 18px !important;
+  gap: 4px;
+  background-color: var(--rve-group-bg);
+  min-width: 80px;
+  overflow: hidden;
+}
+
+.rve-step-grouped:first-child {
+  padding-left: 12px !important;
+}
+
+.rve-sub-step {
+  width: 100%;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  padding: 0 8px;
+  font-size: 0.65rem;
+  clip-path: polygon(0% 0%,
+      calc(100% - 6px) 0%,
+      100% 50%,
+      calc(100% - 6px) 100%,
+      0% 100%,
+      6px 50%);
+}
+
+.rve-step:first-child .rve-sub-step {
+  clip-path: polygon(0% 0%,
+      calc(100% - 6px) 0%,
+      100% 50%,
+      calc(100% - 6px) 100%,
+      0% 100%);
+}
+
+.rve-sub-step-more {
+  background-color: var(--rve-more-bg);
+  color: var(--rve-more-text);
+  border: 1px dashed var(--rve-more-border);
+}
+
+.rve-sub-step-more .rve-step-content {
+  color: inherit;
+  font-weight: 700;
+}
+
+.rve-sub-step .rve-step-content {
+  max-width: 60px;
+}

@@ -1,0 +1,45 @@
+{
+  "name": "react-variant-explorer",
+  "version": "1.1.0",
+  "description": "A premium React component for visualizing process variants in process mining.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --minify --clean --inject-style",
+    "dev": "tsup src/index.ts --format cjs,esm --watch --dts --inject-style",
+    "lint": "tsc"
+  },
+  "keywords": [
+    "react",
+    "process-mining",
+    "variant-explorer",
+    "visualization",
+    "data-viz"
+  ],
+  "author": "Sina Asghari",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}
