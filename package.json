@@ -1,13 +1,16 @@
 {
   "name": "react-variant-explorer",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A premium React component for visualizing process variants in process mining.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
   ],
   "exports": {
     ".": {
