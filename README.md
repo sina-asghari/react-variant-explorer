@@ -2,6 +2,18 @@
 
 A premium, high-performance React component for visualizing process mining variants with a modern, flat aesthetic.
 
+## Preview
+
+### Light Mode
+![Light Mode](./1.jpg)
+
+### Dark Mode
+![Dark Mode](./2.jpg)
+
+### Dark Mode with Detail
+![Dark Mode Detailed](./3.jpg)
+
+
 ## Features
 
 - 🚀 **Grouped Activities**: Handle multiple activities in a single step with vertical stacking and smart truncation (+N more).
