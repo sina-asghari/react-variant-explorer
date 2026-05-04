@@ -2,6 +2,8 @@
 
 A premium, high-performance React component for visualizing process mining variants with a modern, flat aesthetic.
 
+[**Live Demo**](https://sina-asghari.github.io/react-variant-explorer/)
+
 ## Preview
 
 ### Default Design (Light Mode)
