@@ -34,7 +34,7 @@ export const VariantRow: React.FC<VariantRowProps> = ({
       </div>
 
       {columns.map(col => (
-        <div key={col.key} className="rve-row-col" style={{ width: col.width }}>
+        <div key={col.key} className={`rve-row-col ${col.hiddenOnMobile ? 'hidden-mobile' : ''}`} style={{ width: col.width }}>
           {col.render ? col.render(variant) : variant[col.key]}
         </div>
       ))}

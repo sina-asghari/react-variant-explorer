@@ -83,7 +83,7 @@ export const VariantExplorer: React.FC<VariantExplorerProps> = ({
         {columns.map(col => (
           <div
             key={col.key}
-            className="rve-header-col"
+            className={`rve-header-col ${col.hiddenOnMobile ? 'hidden-mobile' : ''}`}
             style={{ width: col.width }}
             onClick={() => col.sortable && toggleSort(col.key)}
           >

@@ -27,6 +27,7 @@ export interface Column {
   render?: (variant: Variant) => React.ReactNode;
   width?: string | number;
   sortable?: boolean;
+  hiddenOnMobile?: boolean;
 }
 
 export interface VariantExplorerProps {

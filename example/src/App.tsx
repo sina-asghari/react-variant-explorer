@@ -67,6 +67,7 @@ const columns = [
     header: 'Cost', 
     sortable: true,
     width: 80,
+    hiddenOnMobile: true,
     render: (v: Variant) => `$${v.cost.toLocaleString()}`
   }
 ];

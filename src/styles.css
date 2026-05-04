@@ -56,6 +56,12 @@
   gap: 8px;
   width: 100%;
   color: var(--rve-text);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.rve-container::-webkit-scrollbar {
+  display: none;
 }
 
 .rve-header {
@@ -69,6 +75,14 @@
   text-transform: uppercase;
   border-bottom: 1px solid var(--rve-border);
   margin-bottom: 4px;
+  min-width: 800px;
+}
+
+@media (max-width: 640px) {
+  .rve-header {
+    gap: 8px;
+    padding: 6px 8px;
+  }
 }
 
 .rve-checkbox-input {
@@ -130,6 +144,7 @@
   transition: all 0.2s ease;
   border: 1px solid var(--rve-border);
   isolation: isolate;
+  min-width: 800px;
 }
 
 .rve-row-selected {
@@ -175,10 +190,7 @@
 .rve-steps-container {
   display: flex;
   align-items: center;
-  overflow-x: auto;
   padding: 8px 12px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
   flex: 1;
 }
 
@@ -374,4 +386,10 @@
 
 .rve-sub-step .rve-step-content {
   max-width: 60px;
+}
+
+@media (max-width: 640px) {
+  .hidden-mobile {
+    display: none !important;
+  }
 }
