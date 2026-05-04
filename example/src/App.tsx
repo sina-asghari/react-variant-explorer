@@ -7,6 +7,8 @@ const sampleVariants: Variant[] = [
     rank: 1,
     frequency: 450,
     percentage: 45,
+    duration: '2d 4h',
+    cost: 1200,
     steps: [
       [
         { id: 'a1', label: 'Order Received', color: '#10b981' },
@@ -25,6 +27,8 @@ const sampleVariants: Variant[] = [
     rank: 2,
     frequency: 320,
     percentage: 32,
+    duration: '5d 12h',
+    cost: 850,
     steps: [
       { id: 'a1', label: 'Order Received', color: '#10b981' },
       [
@@ -40,6 +44,8 @@ const sampleVariants: Variant[] = [
     rank: 3,
     frequency: 180,
     percentage: 18,
+    duration: '1d 2h',
+    cost: 1500,
     steps: [
       { id: 'a1', label: 'Order Received', color: '#10b981' },
       { id: 'a3', label: 'Processing', color: '#f59e0b' },
@@ -49,8 +55,26 @@ const sampleVariants: Variant[] = [
   }
 ];
 
+const columns = [
+  { 
+    key: 'duration', 
+    header: 'Duration', 
+    sortable: true,
+    width: 100 
+  },
+  { 
+    key: 'cost', 
+    header: 'Cost', 
+    sortable: true,
+    width: 80,
+    render: (v: Variant) => `$${v.cost.toLocaleString()}`
+  }
+];
+
 function App() {
   const [theme, setTheme] = React.useState<'light' | 'dark'>('light');
+  const [design, setDesign] = React.useState<'default' | 'minimal' | 'circles'>('default');
+  const [selectedIds, setSelectedIds] = React.useState<string[]>([]);
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
@@ -74,24 +98,54 @@ function App() {
               Visualizing process mining variants with premium React components.
             </p>
           </div>
-          <button 
-            onClick={toggleTheme}
-            style={{
-              padding: '10px 20px',
-              borderRadius: '8px',
-              border: 'none',
+          <div style={{ display: 'flex', gap: '12px' }}>
+            <div style={{ 
+              display: 'flex', 
               backgroundColor: theme === 'dark' ? '#1e293b' : '#ffffff',
-              color: theme === 'dark' ? '#f1f5f9' : '#1e293b',
+              padding: '4px',
+              borderRadius: '10px',
               boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-              cursor: 'pointer',
-              fontWeight: 600,
-              fontSize: '0.875rem',
-              display: 'flex',
-              alignItems: 'center'
-            }}
-          >
-            {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-          </button>
+            }}>
+              {(['default', 'minimal', 'circles'] as const).map((d) => (
+                <button
+                  key={d}
+                  onClick={() => setDesign(d)}
+                  style={{
+                    padding: '6px 12px',
+                    borderRadius: '8px',
+                    border: 'none',
+                    backgroundColor: design === d ? '#6366f1' : 'transparent',
+                    color: design === d ? '#ffffff' : (theme === 'dark' ? '#94a3b8' : '#64748b'),
+                    cursor: 'pointer',
+                    fontWeight: 600,
+                    fontSize: '0.75rem',
+                    textTransform: 'capitalize',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  {d}
+                </button>
+              ))}
+            </div>
+            <button 
+              onClick={toggleTheme}
+              style={{
+                padding: '10px 20px',
+                borderRadius: '8px',
+                border: 'none',
+                backgroundColor: theme === 'dark' ? '#1e293b' : '#ffffff',
+                color: theme === 'dark' ? '#f1f5f9' : '#1e293b',
+                boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: '0.875rem',
+                display: 'flex',
+                alignItems: 'center'
+              }}
+            >
+              {theme === 'light' ? '🌙' : '☀️'}
+            </button>
+          </div>
         </header>
 
         <main>
@@ -99,9 +153,16 @@ function App() {
             <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '20px' }}>
               Top Variants
             </h2>
+            <div style={{ marginBottom: '16px', fontSize: '0.875rem', fontWeight: 500 }}>
+              Selected: {selectedIds.length} variants
+            </div>
             <VariantExplorer 
               variants={sampleVariants} 
+              columns={columns}
+              design={design}
               theme={theme}
+              selectedIds={selectedIds}
+              onSelectionChange={setSelectedIds}
               onActivityClick={(a, v) => console.log('Clicked activity:', Array.isArray(a) ? a.map(x => x.label).join(' > ') : a.label, 'in variant:', v.rank)}
             />
           </section>

@@ -16,11 +16,26 @@ export interface Variant {
   frequency: number;
   percentage: number;
   rank: number;
+  [key: string]: any;
+}
+
+export type VariantDesign = 'default' | 'minimal' | 'circles';
+
+export interface Column {
+  key: string;
+  header: React.ReactNode;
+  render?: (variant: Variant) => React.ReactNode;
+  width?: string | number;
+  sortable?: boolean;
 }
 
 export interface VariantExplorerProps {
   variants: Variant[];
+  columns?: Column[];
+  design?: VariantDesign;
   onActivityClick?: (data: VariantStepData, variant: Variant) => void;
+  onSelectionChange?: (selectedIds: string[]) => void;
+  selectedIds?: string[];
   theme?: 'light' | 'dark' | 'system';
   className?: string;
   style?: React.CSSProperties;
