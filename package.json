@@ -1,7 +1,12 @@
 {
   "name": "react-variant-explorer",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A premium React component for visualizing process variants in process mining.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sina-asghari/react-variant-explorer.git"
+  },
+  "homepage": "https://github.com/sina-asghari/react-variant-explorer#readme",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
