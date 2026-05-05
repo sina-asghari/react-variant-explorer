@@ -63,53 +63,55 @@ export const VariantExplorer: React.FC<VariantExplorerProps> = ({
 
   return (
     <div className={`rve-container ${themeClass} ${className}`} style={style}>
-      <div className="rve-header">
-        <div className="rve-header-checkbox">
-          <input
-            className="rve-checkbox-input"
-            type="checkbox"
-            checked={isAllSelected}
-            ref={el => { if (el) el.indeterminate = isIndeterminate; }}
-            onChange={handleSelectAll}
-          />
-        </div>
-        <div className="rve-header-count" onClick={() => toggleSort('frequency')}>
-          Count
-          <span className={`rve-sort-icon ${sortConfig?.key === 'frequency' ? 'active' : ''}`}>
-            {sortConfig?.key === 'frequency' ? (sortConfig.order === 'asc' ? '↑' : '↓') : '↕'}
-          </span>
-        </div>
-
-        {columns.map(col => (
-          <div
-            key={col.key}
-            className={`rve-header-col ${col.hiddenOnMobile ? 'hidden-mobile' : ''}`}
-            style={{ width: col.width }}
-            onClick={() => col.sortable && toggleSort(col.key)}
-          >
-            {col.header}
-            {col.sortable && (
-              <span className={`rve-sort-icon ${sortConfig?.key === col.key ? 'active' : ''}`}>
-                {sortConfig?.key === col.key ? (sortConfig.order === 'asc' ? '↑' : '↓') : '↕'}
-              </span>
-            )}
+      <div className="rve-inner-container">
+        <div className="rve-header">
+          <div className="rve-header-checkbox">
+            <input
+              className="rve-checkbox-input"
+              type="checkbox"
+              checked={isAllSelected}
+              ref={el => { if (el) el.indeterminate = isIndeterminate; }}
+              onChange={handleSelectAll}
+            />
           </div>
-        ))}
+          <div className="rve-header-count" onClick={() => toggleSort('frequency')}>
+            Count
+            <span className={`rve-sort-icon ${sortConfig?.key === 'frequency' ? 'active' : ''}`}>
+              {sortConfig?.key === 'frequency' ? (sortConfig.order === 'asc' ? '↑' : '↓') : '↕'}
+            </span>
+          </div>
 
-        <div className="rve-header-variants">Variants</div>
-      </div>
-      <div className="rve-rows-container">
-        {sortedVariants.map((variant) => (
-          <VariantRow
-            key={variant.id}
-            variant={variant}
-            columns={columns}
-            design={design}
-            onActivityClick={onActivityClick}
-            isSelected={selectedIds.includes(variant.id)}
-            onSelect={(selected) => handleSelectRow(variant.id, selected)}
-          />
-        ))}
+          {columns.map(col => (
+            <div
+              key={col.key}
+              className={`rve-header-col ${col.hiddenOnMobile ? 'hidden-mobile' : ''}`}
+              style={{ width: col.width }}
+              onClick={() => col.sortable && toggleSort(col.key)}
+            >
+              {col.header}
+              {col.sortable && (
+                <span className={`rve-sort-icon ${sortConfig?.key === col.key ? 'active' : ''}`}>
+                  {sortConfig?.key === col.key ? (sortConfig.order === 'asc' ? '↑' : '↓') : '↕'}
+                </span>
+              )}
+            </div>
+          ))}
+
+          <div className="rve-header-variants">Variants</div>
+        </div>
+        <div className="rve-rows-container">
+          {sortedVariants.map((variant) => (
+            <VariantRow
+              key={variant.id}
+              variant={variant}
+              columns={columns}
+              design={design}
+              onActivityClick={onActivityClick}
+              isSelected={selectedIds.includes(variant.id)}
+              onSelect={(selected) => handleSelectRow(variant.id, selected)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
